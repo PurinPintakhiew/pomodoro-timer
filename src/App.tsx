@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
 function App() {
-  const defaultTime: number = 24 * 1000 * 60;
+  const defaultTime: number = (24 * (100 * 60)) + 100;
 
   const [start, setStart] = useState(false);
   const [time, setTime] = useState(defaultTime);
 
   const timeFormat = (time: number) => {
-    const minute = time || "00";
-    const second = time || "00";
-    return `${minute}:${second}`;
+    const minute = Math.floor(time / (100 * 60));
+    const second = Math.ceil(minute - (time / (100 * 60)));
+    return `${minute || "00"}:${second || "00"}`;
   }
 
   return (

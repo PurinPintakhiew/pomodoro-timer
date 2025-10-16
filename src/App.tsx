@@ -1,16 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
-  const defaultTime: number = (24 * (100 * 60)) + 100;
+  const defaultSecond: number = 1000;
+  const defaultMinute: number = defaultSecond * 60;
+  const defaultTime: number = 25 * defaultMinute;
+
 
   const [start, setStart] = useState(false);
   const [time, setTime] = useState(defaultTime);
 
-  const timeFormat = (time: number) => {
-    const minute = Math.floor(time / (100 * 60));
-    const second = Math.ceil(minute - (time / (100 * 60)));
+  const timeFormat = (value: number) => {
+    const minute = Math.floor(value / defaultMinute);
+    const second = Math.floor((value % defaultMinute) / defaultSecond);
     return `${minute || "00"}:${second || "00"}`;
   }
+
+  useEffect(() => {
+    if (time > 0 && start) {
+      const timer: number = setTimeout(() => setTime(time - 1000), 1000);
+      return () => clearTimeout(timer);
+    } else {
+
+    }
+  }, [start, time]);
 
   return (
     <>
@@ -23,12 +35,14 @@ function App() {
               start ?
                 <button
                   className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold'
+                  onClick={() => { setStart(false); }}
                 >
                   Stop
                 </button>
                 :
                 <button
                   className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold'
+                  onClick={() => { setStart(true); }}
                 >
                   Start
                 </button>

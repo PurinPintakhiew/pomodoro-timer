@@ -12,7 +12,7 @@ function App() {
   const timeFormat = (value: number) => {
     const minute = Math.floor(value / defaultMinute);
     const second = Math.floor((value % defaultMinute) / defaultSecond);
-    return `${minute || "00"}:${second || "00"}`;
+    return `${String(minute).padStart(2, "0")}:${String(second).padStart(2, "0")}`;
   }
 
   useEffect(() => {
@@ -29,19 +29,19 @@ function App() {
       <div className="bg-[#F56247] h-screen w-screen flex flex-col justify-center items-center">
         <h1 className='text-5xl font-bold text-white'>Pomodoro Timer</h1>
         <div className="rounded-md mt-4 p-8 bg-[#FA8E7A]">
-          <h1 className='text-5xl font-bold text-white'>{timeFormat(time)}</h1>
+          <h1 className='text-9xl font-bold text-white'>{timeFormat(time)}</h1>
           <div className="flex justify-center gap-2 mt-5">
             {
               start ?
                 <button
-                  className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold'
+                  className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold hover:bg-[#F56247] hover:text-white'
                   onClick={() => { setStart(false); }}
                 >
                   Stop
                 </button>
                 :
                 <button
-                  className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold'
+                  className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold hover:bg-[#F56247] hover:text-white'
                   onClick={() => { setStart(true); }}
                 >
                   Start

@@ -3,13 +3,27 @@ import { useEffect, useState } from 'react'
 function App() {
   const defaultSecond: number = 1000;
   const defaultMinute: number = defaultSecond * 60;
-  const pomodoroTime: number = 1 * defaultMinute;
-  const breakTime: number = 1 * defaultMinute;
+  const pomodoroTime: number = 25 * defaultMinute;
+  const breakTime: number = 5 * defaultMinute;
   const [isBreak, setIsBreak] = useState(false);
 
 
   const [start, setStart] = useState(false);
   const [time, setTime] = useState(pomodoroTime);
+
+  const handleStart = () => {
+    setStart(!start);
+  }
+
+  const handleWork = () => {
+    setIsBreak(false);
+    setTime(pomodoroTime);
+  }
+
+  const handleBreak = () => {
+    setIsBreak(true);
+    setTime(breakTime);
+  }
 
   const timeFormat = (value: number) => {
     const minute = Math.floor(value / defaultMinute);
@@ -36,33 +50,35 @@ function App() {
     <>
       <div className="bg-[#F56247] h-screen w-screen flex flex-col justify-center items-center">
         <h1 className='text-5xl font-bold text-white'>Pomodoro Timer</h1>
-        <div className="rounded-md mt-4 p-8 bg-[#FA8E7A]">
-          <div className='flex justify-center gap-2'>
-            <div className='rounded-2xl py-2 px-4 text-2xl font-bold text-white'
+        <div className="flex flex-col gap-2 rounded-md mt-4 p-8 bg-[#FA8E7A]">
+          <div className='flex justify-center gap-2 mb-4'>
+            <button className='rounded-2xl py-2 px-4 text-2xl font-bold text-white cursor-pointer'
               style={{ background: isBreak ? "#FFEDD4" : "#F56247" }}
+              onClick={handleWork}
             >
               Work
-            </div>
-            <div className='rounded-2xl py-2 px-4 text-2xl font-bold text-white'
+            </button>
+            <button className='rounded-2xl py-2 px-4 text-2xl font-bold text-white cursor-pointer'
               style={{ background: isBreak ? "#F56247" : "#FFEDD4" }}
+              onClick={handleBreak}
             >
               Break
-            </div>
+            </button>
           </div>
           <h1 className='text-9xl font-bold text-white mb-10'>{timeFormat(time)}</h1>
           <div className="flex justify-center gap-2 mt-5">
             {
               start ?
                 <button
-                  className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold hover:bg-[#F56247] hover:text-white text-4xl'
-                  onClick={() => { setStart(false); }}
+                  className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold hover:bg-[#F56247] hover:text-white text-4xl cursor-pointer'
+                  onClick={handleStart}
                 >
                   Stop
                 </button>
                 :
                 <button
-                  className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold hover:bg-[#F56247] hover:text-white text-4xl'
-                  onClick={() => { setStart(true); }}
+                  className='rounded-2xl py-2 px-4 text-[#F56247] bg-[#FFEDD4] font-bold hover:bg-[#F56247] hover:text-white text-4xl cursor-pointer'
+                  onClick={handleStart}
                 >
                   Start
                 </button>

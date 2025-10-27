@@ -74,7 +74,6 @@ function App() {
       style={{ background: isBreak ? "#2B7FFF" : "#F56247" }}
     >
       <h1 className="text-5xl font-bold text-white mb-4">Pomodoro Timer</h1>
-
       <div className="flex flex-col items-center gap-4 rounded-xl p-8 bg-white/20 backdrop-blur-md">
         <div className="flex justify-center gap-4 mb-4">
           <button

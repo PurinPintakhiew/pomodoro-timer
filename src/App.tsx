@@ -69,45 +69,53 @@ function App() {
   }, [start, time, isBreak, round]);
 
   return (
-    <div
-      className="h-screen w-screen flex flex-col justify-center items-center transition-all duration-500"
-      style={{ background: isBreak ? "#2B7FFF" : "#F56247" }}
-    >
-      <h1 className="text-5xl font-bold text-white mb-4">Pomodoro Timer</h1>
-      <div className="flex flex-col items-center gap-4 rounded-xl p-8 bg-white/20 backdrop-blur-md">
-        <div className="flex justify-center gap-4 mb-4">
-          <button
-            className="rounded-2xl py-2 px-4 text-2xl font-bold cursor-pointer transition-all"
-            style={{
-              background: isBreak ? "#FFEDD4" : "#F56247",
-              color: isBreak ? "#000" : "#fff",
-            }}
-            onClick={handleWork}
-          >
-            Work
-          </button>
-          <button
-            className="rounded-2xl py-2 px-4 text-2xl font-bold cursor-pointer transition-all"
-            style={{
-              background: isBreak ? "#2B7FFF" : "#FFEDD4",
-              color: isBreak ? "#fff" : "#000",
-            }}
-            onClick={handleBreak}
-          >
-            Break
-          </button>
+    <>
+      <div
+        className="h-screen w-screen flex flex-col justify-center items-center transition-all duration-500"
+        style={{ background: isBreak ? "#2B7FFF" : "#F56247" }}
+      >
+        <div className="sm:px-5 md:px-10">
+          <h1 className="text-5xl font-bold text-white mb-4">Pomodoro Timer</h1>
+          <div className="flex flex-col items-center gap-4 rounded-xl p-8 bg-white/20 backdrop-blur-md mb-4">
+            <div className="flex justify-center gap-4 mb-4">
+              <button
+                className="rounded-2xl py-2 px-4 text-2xl font-bold cursor-pointer transition-all"
+                style={{
+                  background: isBreak ? "#FFEDD4" : "#F56247",
+                  color: isBreak ? "#000" : "#fff",
+                }}
+                onClick={handleWork}
+              >
+                Work
+              </button>
+              <button
+                className="rounded-2xl py-2 px-4 text-2xl font-bold cursor-pointer transition-all"
+                style={{
+                  background: isBreak ? "#2B7FFF" : "#FFEDD4",
+                  color: isBreak ? "#fff" : "#000",
+                }}
+                onClick={handleBreak}
+              >
+                Break
+              </button>
+            </div>
+            <h2 className="text-9xl font-bold text-white mb-2">{timeFormat(time)}</h2>
+            <p className="text-xl font-semibold text-white">Round {round + 1}</p>
+            <button
+              className="rounded-2xl py-2 px-6 text-4xl font-bold text-[#F56247] bg-[#FFEDD4] hover:bg-[#F56247] hover:text-white transition-all cursor-pointer mt-6"
+              onClick={handleStart}
+            >
+              {start ? "Stop" : "Start"}
+            </button>
+          </div>
+          <div className='flex justify-between items-center w-full'>
+            <h4 className='text-white text-2xl font-bold'>To-Do List</h4>
+            <button className='text-white text-2xl font-bold'>+</button>
+          </div>
         </div>
-        <h2 className="text-9xl font-bold text-white mb-2">{timeFormat(time)}</h2>
-        <p className="text-xl font-semibold text-white">Round {round + 1}</p>
-        <button
-          className="rounded-2xl py-2 px-6 text-4xl font-bold text-[#F56247] bg-[#FFEDD4] hover:bg-[#F56247] hover:text-white transition-all cursor-pointer mt-6"
-          onClick={handleStart}
-        >
-          {start ? "Stop" : "Start"}
-        </button>
       </div>
       <audio ref={audioPlayer} src={NotificationSound} preload="auto" />
-    </div>
+    </>
   );
 }
 
